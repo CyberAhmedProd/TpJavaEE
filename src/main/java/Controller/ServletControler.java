@@ -32,6 +32,9 @@ public class ServletControler extends HttpServlet {
 		 request.setAttribute("errorVal1", "");
 		 request.setAttribute("errorVal2", "");
 		 request.setAttribute("Entrees", "");
+		 request.setAttribute("v1", request.getParameter("va1"));
+		 request.setAttribute("v2", request.getParameter("va2"));
+		 request.setAttribute("errorVal2", "vide");
 		 if(request.getParameter("va1").isEmpty() || request.getParameter("va2").isEmpty())
 		 {
 			 if(request.getParameter("va1").isEmpty())
@@ -64,7 +67,11 @@ public class ServletControler extends HttpServlet {
 			 Entrees entre = new Entrees(val1,val2);
 			 int pgcd = entre.pgcd(val1, val2);
 			 int ppcm = entre.ppcm(val1,val2);
-			 request.setAttribute("Entrees",pgcd);
+			 String choix = request.getParameter("choix");
+			 if(choix.equals("PGCD"))
+				 request.setAttribute("Entrees",pgcd);
+			 else
+				 request.setAttribute("Entrees",ppcm);
 			 this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 		 }
 		 
