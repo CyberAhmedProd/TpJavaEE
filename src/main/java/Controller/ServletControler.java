@@ -28,12 +28,28 @@ public class ServletControler extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 int val1 = Integer.parseInt(request.getParameter("va1"));
-		 int val2 = Integer.parseInt(request.getParameter("va2"));
+		 
 		 request.setAttribute("errorVal1", "");
 		 request.setAttribute("errorVal2", "");
 		 request.setAttribute("Entrees", "");
+		 if(request.getParameter("va1").isEmpty() || request.getParameter("va2").isEmpty())
+		 {
+			 if(request.getParameter("va1").isEmpty())
+			 {
+				 request.setAttribute("errorVal1", "vide");
+			 }
+			 
+			 
+			 if(request.getParameter("va2").isEmpty())
+			 {
+				 request.setAttribute("errorVal2", "vide");
+			 }
+			 this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+		 }
+		
 		 
+		 int val1 = Integer.parseInt(request.getParameter("va1"));
+		 int val2 = Integer.parseInt(request.getParameter("va2"));
 		 if(val1 <1 || val2 < 1)
 		 {
 			 if(val1 <1)
